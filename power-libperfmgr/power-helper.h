@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, 2013, 2015, 2017-2018, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2018, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,43 +27,74 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Default use-case hint IDs */
-#define DEFAULT_VIDEO_ENCODE_HINT_ID (0x0A00)
-#define DEFAULT_VIDEO_DECODE_HINT_ID (0x0B00)
-#define DISPLAY_STATE_HINT_ID (0x0C00)
-#define DISPLAY_STATE_HINT_ID_2 (0x0D00)
-#define CAM_PREVIEW_HINT_ID (0x0E00)
-#define SUSTAINED_PERF_HINT_ID (0x0F00)
-#define VR_MODE_HINT_ID (0x1000)
-#define VR_MODE_SUSTAINED_PERF_HINT_ID (0x1001)
-#define INTERACTION_HINT_ID (0x1A00)
+#ifndef __POWER_HELPER_H__
+#define __POWER_HELPER_H__
 
-#define AOSP_DELTA (0x1200)
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#define VSYNC_HINT AOSP_DELTA + POWER_HINT_VSYNC
-#define INTERACTION_HINT AOSP_DELTA + POWER_HINT_INTERACTION
-#define VIDEO_DECODE_HINT AOSP_DELTA + POWER_HINT_VIDEO_DECODE
-#define VIDEO_ENCODE_HINT AOSP_DELTA + POWER_HINT_VIDEO_ENCODE
-#define LOW_POWER_HINT AOSP_DELTA + POWER_HINT_LOW_POWER
-#define SUSTAINED_PERF_HINT AOSP_DELTA + POWER_HINT_SUSTAINED_PERFORMANCE
-#define VR_MODE_HINT AOSP_DELTA + POWER_HINT_VR_MODE
-#define LAUNCH_HINT AOSP_DELTA + POWER_HINT_LAUNCH
-#define DISABLE_TOUCH_HINT AOSP_DELTA + POWER_HINT_DISABLE_TOUCH
+enum stats_type {
+    //Platform Stats
+    RPM_MODE_XO = 0,
+    RPM_MODE_VMIN,
+    RPM_MODE_MAX,
+    XO_VOTERS_START = RPM_MODE_MAX,
+    VOTER_APSS = XO_VOTERS_START,
+    VOTER_MPSS,
+    VOTER_ADSP,
+    VOTER_SLPI,
+    MAX_PLATFORM_STATS,
 
-//update NUM_HINTS if hints are added to AOSP
-#define NUM_HINTS                       (POWER_HINT_DISABLE_TOUCH +1)
-
-#define VR_MODE_SUSTAINED_PERF_HINT (0x1301)
-
-struct hint_handles{
-    int handle;
-    int ref_count;
+    //WLAN Stats
+    WLAN_POWER_DEBUG_STATS = 0,
+    MAX_WLAN_STATS,
 };
 
-struct hint_data {
-    unsigned long hint_id; /* This is our key. */
-    unsigned long perflock_handle;
+enum subsystem_type {
+    SUBSYSTEM_WLAN = 0,
+
+    //Don't add any lines after this line
+    SUBSYSTEM_COUNT
 };
 
-int hint_compare(struct hint_data* first_hint, struct hint_data* other_hint);
-void hint_dump(struct hint_data* hint);
+enum wlan_sleep_states {
+    WLAN_STATE_ACTIVE = 0,
+    WLAN_STATE_DEEP_SLEEP,
+
+    //Don't add any lines after this line
+    WLAN_STATES_COUNT
+};
+
+enum wlan_power_params {
+    CUMULATIVE_SLEEP_TIME_MS = 0,
+    CUMULATIVE_TOTAL_ON_TIME_MS,
+    DEEP_SLEEP_ENTER_COUNTER,
+    LAST_DEEP_SLEEP_ENTER_TSTAMP_MS,
+
+    //Don't add any lines after this line
+    WLAN_POWER_PARAMS_COUNT
+};
+
+
+#define PLATFORM_SLEEP_MODES_COUNT RPM_MODE_MAX
+
+#define MAX_RPM_PARAMS 2
+#define XO_VOTERS (MAX_PLATFORM_STATS - XO_VOTERS_START)
+#define VMIN_VOTERS 0
+
+struct stat_pair {
+    enum stats_type stat;
+    const char *label;
+    const char **parameters;
+    size_t num_parameters;
+};
+
+int extract_platform_stats(uint64_t *list);
+int extract_wlan_stats(uint64_t *list);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif //__POWER_HELPER_H__
