@@ -47,6 +47,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.video=true \
     media.settings.xml=/system/etc/media_profiles_vendor.xml
 
+# Make data selection stick in dual SIM devices
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.aosp_usr_pref_sel=true
+
 # Memory optimizations
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.bservice_enable=true
