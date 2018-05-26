@@ -18,6 +18,7 @@
 #define ANDROID_HARDWARE_POWER_V1_3_POWER_H
 
 #include <atomic>
+#include <thread>
 
 #include <android/hardware/power/1.3/IPower.h>
 #include <hidl/MQDescriptor.h>
@@ -44,6 +45,7 @@ using ::android::perfmgr::HintManager;
 
 constexpr char kPowerHalStateProp[] = "vendor.powerhal.state";
 constexpr char kPowerHalAudioProp[] = "vendor.powerhal.audio";
+constexpr char kPowerHalInitProp[] = "vendor.powerhal.init";
 constexpr char kPowerHalRenderingProp[] = "vendor.powerhal.rendering";
 
 struct Power : public IPower {
@@ -72,11 +74,12 @@ struct Power : public IPower {
     static bool isSupportedGovernor();
 
     std::shared_ptr<HintManager> mHintManager;
-    InteractionHandler mInteractionHandler;
+    std::unique_ptr<InteractionHandler> mInteractionHandler;
     std::atomic<bool> mVRModeOn;
     std::atomic<bool> mSustainedPerfModeOn;
     std::atomic<bool> mEncoderModeOn;
     std::atomic<bool> mReady;
+    std::thread mInitThread;
 };
 
 }  // namespace implementation

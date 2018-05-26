@@ -49,46 +49,56 @@ using ::android::hardware::Return;
 using ::android::hardware::Void;
 
 Power::Power() :
-        mHintManager(HintManager::GetFromJSON("/system/etc/powerhint.json")),
-        mInteractionHandler(mHintManager),
+        mHintManager(nullptr),
+        mInteractionHandler(nullptr),
         mVRModeOn(false),
         mSustainedPerfModeOn(false),
-        mEncoderModeOn(false) {
-    mInteractionHandler.Init();
+        mEncoderModeOn(false),
+        mReady(false) {
 
-    std::string state = android::base::GetProperty(kPowerHalStateProp, "");
-    if (state == "VIDEO_ENCODE") {
-        ALOGI("Initialize with VIDEO_ENCODE on");
-        mHintManager->DoHint("VIDEO_ENCODE");
-        mEncoderModeOn = true;
-    } else if (state ==  "SUSTAINED_PERFORMANCE") {
-        ALOGI("Initialize with SUSTAINED_PERFORMANCE on");
-        mHintManager->DoHint("SUSTAINED_PERFORMANCE");
-        mSustainedPerfModeOn = true;
-    } else if (state == "VR_MODE") {
-        ALOGI("Initialize with VR_MODE on");
-        mHintManager->DoHint("VR_MODE");
-        mVRModeOn = true;
-    } else if (state == "VR_SUSTAINED_PERFORMANCE") {
-        ALOGI("Initialize with SUSTAINED_PERFORMANCE and VR_MODE on");
-        mHintManager->DoHint("VR_SUSTAINED_PERFORMANCE");
-        mSustainedPerfModeOn = true;
-        mVRModeOn = true;
-    } else {
-        ALOGI("Initialize PowerHAL");
-    }
+    mInitThread =
+            std::thread([this](){
+                            android::base::WaitForProperty(kPowerHalInitProp, "1");
+                            mHintManager = HintManager::GetFromJSON("/system/etc/powerhint.json");
+                            mInteractionHandler = std::make_unique<InteractionHandler>(mHintManager);
+                            mInteractionHandler->Init();
+                            std::string state = android::base::GetProperty(kPowerHalStateProp, "");
+                            if (state == "VIDEO_ENCODE") {
+                                ALOGI("Initialize with VIDEO_ENCODE on");
+                                mHintManager->DoHint("VIDEO_ENCODE");
+                                mEncoderModeOn = true;
+                            } else if (state ==  "SUSTAINED_PERFORMANCE") {
+                                ALOGI("Initialize with SUSTAINED_PERFORMANCE on");
+                                mHintManager->DoHint("SUSTAINED_PERFORMANCE");
+                                mSustainedPerfModeOn = true;
+                            } else if (state == "VR_MODE") {
+                                ALOGI("Initialize with VR_MODE on");
+                                mHintManager->DoHint("VR_MODE");
+                                mVRModeOn = true;
+                            } else if (state == "VR_SUSTAINED_PERFORMANCE") {
+                                ALOGI("Initialize with SUSTAINED_PERFORMANCE and VR_MODE on");
+                                mHintManager->DoHint("VR_SUSTAINED_PERFORMANCE");
+                                mSustainedPerfModeOn = true;
+                                mVRModeOn = true;
+                            } else {
+                                ALOGI("Initialize PowerHAL");
+                            }
 
-    state = android::base::GetProperty(kPowerHalAudioProp, "");
-    if (state == "LOW_LATENCY") {
-        ALOGI("Initialize with AUDIO_LOW_LATENCY on");
-        mHintManager->DoHint("AUDIO_LOW_LATENCY");
-    }
+                            state = android::base::GetProperty(kPowerHalAudioProp, "");
+                            if (state == "LOW_LATENCY") {
+                                ALOGI("Initialize with AUDIO_LOW_LATENCY on");
+                                mHintManager->DoHint("AUDIO_LOW_LATENCY");
+                            }
 
-    state = android::base::GetProperty(kPowerHalRenderingProp, "");
-    if (state == "EXPENSIVE_RENDERING") {
-        ALOGI("Initialize with EXPENSIVE_RENDERING on");
-        mHintManager->DoHint("EXPENSIVE_RENDERING");
-    }
+                            state = android::base::GetProperty(kPowerHalRenderingProp, "");
+                            if (state == "EXPENSIVE_RENDERING") {
+                                ALOGI("Initialize with EXPENSIVE_RENDERING on");
+                                mHintManager->DoHint("EXPENSIVE_RENDERING");
+                            }
+
+                            // Now start to take powerhint
+                            mReady.store(true);
+                        });
 }
 
 // Methods from ::android::hardware::power::V1_0::IPower follow.
@@ -97,7 +107,7 @@ Return<void> Power::setInteractive(bool /* interactive */)  {
 }
 
 Return<void> Power::powerHint(PowerHint_1_0 hint, int32_t data) {
-    if (!isSupportedGovernor()) {
+    if (!isSupportedGovernor() || !mReady) {
         return Void();
     }
 
@@ -106,7 +116,7 @@ Return<void> Power::powerHint(PowerHint_1_0 hint, int32_t data) {
             if (mVRModeOn || mSustainedPerfModeOn) {
                 ALOGV("%s: ignoring due to other active perf hints", __func__);
             } else {
-                mInteractionHandler.Acquire(data);
+                mInteractionHandler->Acquire(data);
             }
             break;
         case PowerHint_1_0::VIDEO_ENCODE:
@@ -393,7 +403,7 @@ Return<void> Power::powerHintAsync(PowerHint_1_0 hint, int32_t data) {
 
 // Methods from ::android::hardware::power::V1_2::IPower follow.
 Return<void> Power::powerHintAsync_1_2(PowerHint_1_2 hint, int32_t data) {
-    if (!isSupportedGovernor()) {
+    if (!isSupportedGovernor() || !mReady) {
         return Void();
     }
 
