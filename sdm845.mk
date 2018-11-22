@@ -30,6 +30,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml
 
+# Boost Framework
+PRODUCT_BOOT_JARS += \
+    QPerformance \
+    UxPerformance
+
 # Common init scripts
 PRODUCT_PACKAGES += \
     init.qcom.rc
