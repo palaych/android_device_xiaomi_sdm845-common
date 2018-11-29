@@ -1,3 +1,5 @@
+type hal_perf_default, domain, mlstrustedsubject;
+type proc_kernel_sched, fs_type;
 allow hal_perf_default {
     system_server
     perfservice
