@@ -58,7 +58,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # RCS and IMS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=0 \
-    persist.vendor.ims.disableUserAgent=0
+    persist.vendor.ims.disableUserAgent=0 \
+    persist.radio.calls.on.ims=1
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
