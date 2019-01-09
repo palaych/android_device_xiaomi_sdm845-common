@@ -128,27 +128,29 @@ lib/vendor.xiaomi.hardware.mtdservice@1.2.so
 lib/vendor.xiaomi.hardware.vsimapp@1.0.so
 
 # Perf
-bin/perfservice
-etc/init/perfservice.rc
-etc/perf/whitelistedapps.xml
--framework/QPerformance.jar
--framework/UxPerformance.jar
-lib64/libqti-at.so
-lib64/libqti-iopd-client_system.so
-lib64/libqti-perfd-client_system.so
-lib64/libqti-util_system.so
-lib64/libqti_performance.so
 lib64/vendor.qti.hardware.iop@1.0.so
 lib64/vendor.qti.hardware.iop@2.0.so
 lib64/vendor.qti.hardware.perf@1.0.so
-lib/libqti-at.so
-lib/libqti-iopd-client_system.so
-lib/libqti-perfd-client_system.so
-lib/libqti-util_system.so
-lib/libqti_performance.so
 lib/vendor.qti.hardware.iop@1.0.so
 lib/vendor.qti.hardware.iop@2.0.so
 lib/vendor.qti.hardware.perf@1.0.so
+
+# Perf - from daisy - PKQ1.180917
+bin/perfservice|03d6368017d4c41f7fea647c669b69d6567238af
+etc/init/perfservice.rc|67144c3f1800f976cb58463c4370882d2d820947
+etc/perf/whitelistedapps.xml|a489e65df170543a2817a690fbae36c34e29613b
+-framework/QPerformance.jar|70a5463b9ff26d51715ce31523efcaa7d4840f10
+-framework/UxPerformance.jar|0e3babfa37e2368aee16de3d6f8cdea06e081dea
+lib/libqti-at.so|1101ee354735905f39337bc032c6b547dbce846c
+lib/libqti-iopd-client_system.so|d1602341242d949bee431d8856df9aacc38c4b6b
+lib/libqti-perfd-client_system.so|74f4d9657cf492cf1de2e9b93983f4e7b5431c45
+lib/libqti-util_system.so|66fcc57fee4f978f9b52429539b980ac3550f8e3
+lib/libqti_performance.so|dc0995fa3217b6c44029b55b5151adaae515392a
+lib64/libqti-at.so|d4bd59dc50cb466ce3c2efb96cb2f2bb232a1baa
+lib64/libqti-iopd-client_system.so|e8bb1863c7f864987c9070077e41a43cf79dcc97
+lib64/libqti-perfd-client_system.so|de5b61f07d7981bb208167b357f46a9ad083c9e7
+lib64/libqti-util_system.so|0e62bd1422f40154c22e858df268009bb66d4f2f
+lib64/libqti_performance.so|9c88af412e0276c578f06e1069b6c3aeae7e3f8d
 
 # Power-off charging daemon
 -sbin/charger:sbin/chargeonlymode;rootfs|f048d2cc20783ba1a608b73d440b3053af6ec9fd
