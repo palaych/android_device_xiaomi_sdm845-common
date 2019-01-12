@@ -89,11 +89,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ssr.enable_ramdumps=0 \
     persist.vendor.ssr.restart_level=ALL_ENABLE
 
-# WFD
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=0
-
 # DPI
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=420
