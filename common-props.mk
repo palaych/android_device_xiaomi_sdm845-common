@@ -90,7 +90,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ssr.enable_ramdumps=0 \
     persist.vendor.ssr.restart_level=ALL_ENABLE
-
-# DPI
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=420
