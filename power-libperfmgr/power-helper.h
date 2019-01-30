@@ -34,6 +34,11 @@
 extern "C" {
 #endif
 
+#include <hardware/power.h>
+
+#define INPUT_EVENT_WAKUP_MODE_OFF 4
+#define INPUT_EVENT_WAKUP_MODE_ON 5
+
 // These values are used as indices in getSubsystemLowPowerStats(), as source IDs
 // in stats_section instances, and (in the case of the _COUNT values) to dimension
 // containers.  The values used as indices need to be contiguous, but others do
@@ -128,6 +133,7 @@ struct stats_section {
 int extract_master_stats(uint64_t *list, size_t list_length);
 int extract_wlan_stats(uint64_t *list, size_t list_length);
 int extract_system_stats(uint64_t *list, size_t list_length);
+void set_feature(feature_t feature, int state);
 
 #ifdef __cplusplus
 }
