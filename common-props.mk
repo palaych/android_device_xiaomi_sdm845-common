@@ -68,11 +68,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RCS and IMS
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.dbg.ims_volte_enable=1 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
     persist.rcs.supported=0 \
     persist.vendor.ims.disableUserAgent=0 \
-    persist.radio.calls.on.ims=1
+    persist.data.iwlan.enable=true \
+    persist.dbg.wfc_avail_ovr=1
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -84,7 +86,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.report_codec=1 \
     ril.subscription.types=NV,RUIM \
     ro.telephony.default_network=22,22 \
-    telephony.lteOnCdmaDevice=1
+    telephony.lteOnCdmaDevice=1 \
+    persist.radio.rat_on=combine \
+    persist.radio.data_ltd_sys_ind=1 \
+    persist.radio.data_con_rprt=1 \
+    persist.radio.calls.on.ims=1
 
 # SSR
 PRODUCT_PROPERTY_OVERRIDES += \
