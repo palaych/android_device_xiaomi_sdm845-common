@@ -140,5 +140,8 @@ BOARD_VNDK_RUNTIME_DISABLE := true
 BOARD_VNDK_VERSION := current
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
+# Use old mnc format
+TARGET_USE_OLD_MNC_FORMAT := true
+
 # Inherit from the proprietary version
 -include vendor/xiaomi/sdm845-common/BoardConfigVendor.mk
