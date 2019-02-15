@@ -31,6 +31,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml
 
+# Camera
+PRODUCT_PACKAGES += \
+    Snap
+
 # Common init scripts
 PRODUCT_PACKAGES += \
     init.qcom.rc
@@ -110,10 +114,6 @@ PRODUCT_PACKAGES += \
 # VNDK-SP
 PRODUCT_PACKAGES += \
     vndk-sp
-
-# Camera
-PRODUCT_PACKAGES += \
-    Camera2
 
 # WiFi Display
 PRODUCT_PACKAGES += \
