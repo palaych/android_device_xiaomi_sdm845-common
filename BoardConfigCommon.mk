@@ -138,5 +138,8 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 # Use old mnc format
 TARGET_USE_OLD_MNC_FORMAT := true
 
+# Telephony
+TARGET_USES_ALTERNATIVE_MANUAL_NETWORK_SELECT := true
+
 # Inherit from the proprietary version
 -include vendor/xiaomi/sdm845-common/BoardConfigVendor.mk
