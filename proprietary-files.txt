@@ -109,6 +109,7 @@ lib64/vendor.xiaomi.hardware.tidaservice@1.1.so
 lib/vendor.xiaomi.hardware.vsimapp@1.0.so
 
 # Perf
+lib64/libperfmgr.so
 lib64/vendor.qti.hardware.iop@1.0.so
 lib64/vendor.qti.hardware.iop@2.0.so
 lib64/vendor.qti.hardware.perf@1.0.so
