@@ -34,6 +34,18 @@ service vendor.ss_ramdump_local /vendor/bin/subsystem_ramdump
     group system
     disabled
 
+service vendor.power-hal-1-0 /vendor/bin/hw/android.hardware.power@1.0-service
+    class hal
+    user system
+    group system
+    disabled
+
+service vendor.power-hal-1-2 /vendor/bin/hw/android.hardware.power@1.2-service.dipper-libperfmgr
+    class hal
+    user system
+    group system
+    disabled
+
 on property:init.svc.vendor.cnss_diag=running
     stop vendor.cnss_diag
 
