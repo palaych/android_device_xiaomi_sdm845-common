@@ -95,6 +95,7 @@ lib64/vendor.xiaomi.hardware.citsensorservice@1.0.so
 lib64/vendor.xiaomi.hardware.citsensorservice@1.1.so
 lib64/vendor.xiaomi.hardware.misys@1.0.so
 lib64/vendor.xiaomi.hardware.misys@2.0.so
+lib64/vendor.xiaomi.hardware.touchfeature@1.0.so
 lib/android.hardware.soundtrigger@2.0-core.so
 
 # Mlipay
@@ -106,6 +107,7 @@ lib64/vendor.xiaomi.hardware.mtdservice@1.1.so
 lib64/vendor.xiaomi.hardware.mtdservice@1.2.so
 lib64/vendor.xiaomi.hardware.tidaservice@1.0.so
 lib64/vendor.xiaomi.hardware.tidaservice@1.1.so
+lib/vendor.xiaomi.hardware.mtdservice@1.0.so
 lib/vendor.xiaomi.hardware.vsimapp@1.0.so
 
 # Perf
@@ -129,7 +131,6 @@ framework/QtiTelephonyServicelibrary.jar
 
 # Soter
 -app/SoterService/SoterService.apk
-
 
 # WiFi Display
 bin/wfdservice
