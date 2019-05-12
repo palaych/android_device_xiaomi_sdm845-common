@@ -3,7 +3,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.deep_buffer.media=true \
     ro.af.client_heap_size_kbyte=7168 \
     ro.config.media_vol_steps=25 \
-    ro.config.vc_call_vol_steps=7
+    ro.config.vc_call_vol_steps=7 \
+    ro.qc.sdk.audio.ssr=false \
+    ro.qc.sdk.audio.fluencetype=none \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -23,7 +28,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Data modules
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.dev_name=rmnet_usb0 \
-    persist.vendor.data.profile_update=true \
     persist.vendor.data.mode=concurrent \
     ro.vendor.use_data_netmgrd=true
 
@@ -33,7 +37,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.display.ad=1 \
     ro.vendor.display.ad.hdr_calib_data=/vendor/etc/hdr_config.cfg \
     ro.vendor.display.ad.sdr_calib_data=/vendor/etc/sdr_config.cfg \
-    ro.vendor.display.sensortype=2
+    ro.vendor.display.sensortype=2 \
+    persist.displayfeature.extcolor.proc=0
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
