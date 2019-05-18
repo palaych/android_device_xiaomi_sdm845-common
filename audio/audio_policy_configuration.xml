@@ -178,6 +178,12 @@
                        sources="primary output,deep_buffer,compressed_offload,Telephony Rx"/>
                 <route type="mix" sink="Wired Headphones"
                        sources="primary output,deep_buffer,compressed_offload,Telephony Rx"/>
+                <route type="mix" sink="BT SCO"
+                       sources="primary output,deep_buffer,compressed_offload,Telephony Rx"/>
+                <route type="mix" sink="BT SCO Headset"
+                       sources="primary output,deep_buffer,compressed_offload,Telephony Rx"/>
+                <route type="mix" sink="BT SCO Car Kit"
+                       sources="primary output,deep_buffer,compressed_offload,Telephony Rx"/>
                 <route type="mix" sink="Telephony Tx"
                        sources="voice_tx"/>
                 <route type="mix" sink="primary input"
