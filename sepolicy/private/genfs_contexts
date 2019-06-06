@@ -1,5 +1,3 @@
-genfscon proc /sys/kernel/sched_boost                 u:object_r:proc_sysctl_schedboost:s0
-
 genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/idle_state            u:object_r:sysfs_graphics:s0
 
 genfscon sysfs /power/rpmh_stats/master_stats         u:object_r:sysfs_rpm:s0
