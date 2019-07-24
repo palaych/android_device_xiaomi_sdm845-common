@@ -19,7 +19,7 @@
 /vendor/bin/mlipayd@1\.1                      u:object_r:hal_mlipay_default_exec:s0
 /vendor/bin/nv_mac                            u:object_r:wcnss_service_exec:s0
 
-# Fingerprint devices
+# Fingerprint device
 /dev/goodix_fp                                u:object_r:fingerprint_device:s0
 /dev/vfsspi                                   u:object_r:fingerprint_device:s0
 
@@ -48,7 +48,6 @@
 # HALs
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.xiaomi_sdm845                   u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.light@2\.0-service\.xiaomi_sdm845                                     u:object_r:hal_light_default_exec:s0
-/vendor/bin/hw/vendor\.lineage\.livedisplay@2\.0-service\.xiaomi_sdm845                                 u:object_r:hal_lineage_livedisplay_qti_exec:s0
 /vendor/bin/hw/vendor\.xiaomi\.hardware\.displayfeature@1\.0-service                                    u:object_r:hal_displayfeature_default_exec:s0
 
 # Persist files
