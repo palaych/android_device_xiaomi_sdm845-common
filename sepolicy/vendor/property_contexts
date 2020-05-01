@@ -11,6 +11,11 @@ ro.vendor.display.ad.sdr_calib_data      u:object_r:vendor_dpps_prop:s0
 ro.vendor.display.ad.hdr_calib_data      u:object_r:vendor_dpps_prop:s0
 ro.vendor.display.sensortype             u:object_r:vendor_dpps_prop:s0
 
+# FastRPC
+vendor.fastrpc.perf.kernel    u:object_r:adsprpc_prop:s0 exact int
+vendor.fastrpc.perf.adsp    u:object_r:adsprpc_prop:s0 exact int
+vendor.fastrpc.perf.freq    u:object_r:adsprpc_prop:s0 exact int
+
 # Fingerprint
 fpc_kpi                    u:object_r:vendor_fp_prop:s0
 persist.vendor.sys.fp.     u:object_r:vendor_fp_prop:s0
